@@ -1,0 +1,278 @@
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --font-size: 16px;
+  --background: #ffffff;
+  --foreground: #000000;
+  --card: #f8f9fa;
+  --card-foreground: #000000;
+  --popover: #ffffff;
+  --popover-foreground: #000000;
+  --primary: #000000;
+  --primary-foreground: #ffffff;
+  --secondary: #f1f3f5;
+  --secondary-foreground: #000000;
+  --muted: #f1f3f5;
+  --muted-foreground: #6c757d;
+  --accent: #e9ecef;
+  --accent-foreground: #000000;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: rgba(0, 0, 0, 0.1);
+  --input: transparent;
+  --input-background: #f1f3f5;
+  --switch-background: #000000;
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  --ring: #000000;
+  --chart-1: #000000;
+  --chart-2: #333333;
+  --chart-3: #666666;
+  --chart-4: #999999;
+  --chart-5: #cccccc;
+  --radius: 0.75rem;
+  --sidebar: #f8f9fa;
+  --sidebar-foreground: #000000;
+  --sidebar-primary: #000000;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f1f3f5;
+  --sidebar-accent-foreground: #000000;
+  --sidebar-border: rgba(0, 0, 0, 0.1);
+  --sidebar-ring: #000000;
+  --blue: #000000;
+  --blue-light: #f1f3f5;
+  --blue-dark: #000000;
+}
+
+.dark {
+  --background: #000000;
+  --foreground: #ffffff;
+  --card: #111111;
+  --card-foreground: #ffffff;
+  --popover: #111111;
+  --popover-foreground: #ffffff;
+  --primary: #ffffff;
+  --primary-foreground: #000000;
+  --secondary: #222222;
+  --secondary-foreground: #ffffff;
+  --muted: #222222;
+  --muted-foreground: #a1a1aa;
+  --accent: #333333;
+  --accent-foreground: #ffffff;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: rgba(255, 255, 255, 0.1);
+  --input: transparent;
+  --input-background: #222222;
+  --switch-background: #ffffff;
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  --ring: #ffffff;
+  --chart-1: #ffffff;
+  --chart-2: #cccccc;
+  --chart-3: #999999;
+  --chart-4: #666666;
+  --chart-5: #333333;
+  --sidebar: #111111;
+  --sidebar-foreground: #ffffff;
+  --sidebar-primary: #ffffff;
+  --sidebar-primary-foreground: #000000;
+  --sidebar-accent: #222222;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: rgba(255, 255, 255, 0.1);
+  --sidebar-ring: #ffffff;
+  --purple: #ffffff;
+  --purple-light: #222222;
+  --purple-dark: #dddddd;
+}
+
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-input-background: var(--input-background);
+  --color-switch-background: var(--switch-background);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  /**
+  * Default typography styles for HTML elements (h1-h4, p, label, button, input).
+  * These are in @layer base, so Tailwind utility classes (like text-sm, text-lg) automatically override them.
+  */
+
+  html {
+    font-size: var(--font-size);
+  }
+
+  h1 {
+    font-size: var(--text-2xl);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  h2 {
+    font-size: var(--text-xl);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  h3 {
+    font-size: var(--text-lg);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  h4 {
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  label {
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  button {
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  input {
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-normal);
+    line-height: 1.5;
+  }
+}
+
+/* ── Admin Portal Light Mode Overrides ── */
+html:not(.dark) .admin-portal .bg-\[\#1a1025\] {
+  background-color: #edf3f8 !important;
+}
+html:not(.dark) .admin-portal .bg-\[\#231534\] {
+  background-color: #e0ebf5 !important;
+}
+html:not(.dark) .admin-portal .bg-\[\#1a1025\]\/50 {
+  background-color: rgba(237, 243, 248, 0.5) !important;
+}
+html:not(.dark) .admin-portal .text-white {
+  color: #0d2d52 !important;
+}
+html:not(.dark) .admin-portal .bg-black\/50.text-white,
+html:not(.dark) .admin-portal .bg-black\/50 .text-white,
+html:not(.dark) .admin-portal .bg-black\/60.text-white,
+html:not(.dark) .admin-portal .bg-black\/60 .text-white,
+html:not(.dark) .admin-portal .bg-black\/70.text-white,
+html:not(.dark) .admin-portal .bg-black\/70 .text-white {
+  color: #ffffff !important;
+}
+html:not(.dark) .admin-portal .text-\[\#c09cde\] {
+  color: #2a7dd4 !important;
+}
+html:not(.dark) .admin-portal .text-purple-300\/60 {
+  color: #3a6898 !important;
+}
+html:not(.dark) .admin-portal .text-purple-300 {
+  color: #2a7dd4 !important;
+}
+html:not(.dark) .admin-portal .border-purple-500\/10 {
+  border-color: rgba(42, 125, 212, 0.1) !important;
+}
+html:not(.dark) .admin-portal .border-purple-500\/20 {
+  border-color: rgba(42, 125, 212, 0.18) !important;
+}
+html:not(.dark) .admin-portal .border-purple-500\/30 {
+  border-color: rgba(42, 125, 212, 0.3) !important;
+}
+html:not(.dark) .admin-portal .border-purple-500\/40 {
+  border-color: rgba(42, 125, 212, 0.4) !important;
+}
+html:not(.dark) .admin-portal .border-purple-500\/50 {
+  border-color: rgba(42, 125, 212, 0.5) !important;
+}
+html:not(.dark) .admin-portal .bg-purple-500 {
+  background-color: #2a7dd4 !important;
+}
+html:not(.dark) .admin-portal .bg-purple-500\/10 {
+  background-color: rgba(42, 125, 212, 0.1) !important;
+}
+html:not(.dark) .admin-portal .bg-purple-500\/20 {
+  background-color: rgba(42, 125, 212, 0.2) !important;
+}
+html:not(.dark) .admin-portal .bg-purple-500\/30 {
+  background-color: rgba(42, 125, 212, 0.3) !important;
+}
+html:not(.dark) .admin-portal .from-purple-500 {
+  --tw-gradient-from: #2a7dd4 !important;
+}
+
+/* Also override some inline styles for charts in the admin using CSS attribute selectors */
+html:not(.dark) .admin-portal [style*="background: #1a1025"],
+html:not(.dark) .admin-portal [style*="background: rgb(26, 16, 37)"] {
+  background: #edf3f8 !important;
+}
+html:not(.dark) .admin-portal [style*="background: #231534"],
+html:not(.dark) .admin-portal [style*="background: rgb(35, 21, 52)"] {
+  background: #e0ebf5 !important;
+}
+html:not(.dark) .admin-portal [style*="border: 1px solid rgba(168, 85, 247"] {
+  border-color: rgba(42, 125, 212, 0.2) !important;
+}
+html:not(.dark) .admin-portal [style*="color: #fff"] {
+  color: #0d2d52 !important;
+}
+html:not(.dark) .admin-portal [fill="#fff"] {
+  fill: #0d2d52 !important;
+}
+html:not(.dark) .admin-portal [style*="color: rgba(216,180,254"],
+html:not(.dark) .admin-portal [style*="color: rgba(216, 180, 254"] {
+  color: #3a6898 !important;
+}
+html:not(.dark) .admin-portal [fill*="rgba(216,180,254"],
+html:not(.dark) .admin-portal [fill*="rgba(216, 180, 254"] {
+  fill: #3a6898 !important;
+}
