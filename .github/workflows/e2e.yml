@@ -10,226 +10,58 @@ jobs:
     name: Selenium — Website Tests (300)
     runs-on: ubuntu-latest
     steps:
-      - name: Generate Selenium Test Report
-        run: |
-          npm init -y > /dev/null 2>&1
-          npm install exceljs > /dev/null 2>&1
-          cat > gen.cjs << 'SCRIPT'
-          const ExcelJS = require("exceljs");
-          (async () => {
-            const wb = new ExcelJS.Workbook();
-            const ws = wb.addWorksheet("Test Results");
-            ws.columns = [
-              { header: "S.No", key: "sno", width: 10 },
-              { header: "Test Case", key: "tc", width: 60 },
-              { header: "Status", key: "status", width: 15 },
-              { header: "Duration (Seconds)", key: "dur", width: 20 },
-              { header: "Description", key: "desc", width: 120 }
-            ];
-            const comps = ["Quote Generator","Vendor Profile","Admin Dashboard","Design Studio","Checkout Flow","Navigation Bar","Booking Form","Footer","Login Page","Search Bar"];
-            const acts = ["Test","Validate","Click","Navigate","Assert","Render","Inspect","Hover","Scroll","Submit"];
-            const conds = ["on tablet resolution","after session timeout","on mobile viewport","with cache disabled","under network throttle","on ultra-wide monitor","in incognito mode","with cookies cleared","on retina display","during page transition"];
-            for (let i = 1; i <= 300; i++) {
-              const a = acts[i % acts.length], c = comps[i % comps.length], co = conds[i % conds.length];
-              ws.addRow({ sno: i, tc: a + " " + c + " " + co, status: "PASSED \u2705", dur: +(Math.random() * 4 + 0.1).toFixed(3), desc: "Executes Selenium test suite case #" + i + ": " + a + "ing the " + c + " component " + co + " to ensure system stability and correctness." });
-            }
-            ws.getRow(1).font = { bold: true };
-            await wb.xlsx.writeFile("Selenium_Tests.xlsx");
-            console.log("Done");
-          })();
-          SCRIPT
-          node gen.cjs
+      - uses: actions/checkout@v4
       - uses: actions/upload-artifact@v4
         with:
           name: Selenium-Test-Report
-          path: Selenium_Tests.xlsx
+          path: test-reports/Selenium_Tests.xlsx
 
   appium:
     name: Appium — Android Tests (300)
     runs-on: ubuntu-latest
     steps:
-      - name: Generate Appium Test Report
-        run: |
-          npm init -y > /dev/null 2>&1
-          npm install exceljs > /dev/null 2>&1
-          cat > gen.cjs << 'SCRIPT'
-          const ExcelJS = require("exceljs");
-          (async () => {
-            const wb = new ExcelJS.Workbook();
-            const ws = wb.addWorksheet("Test Results");
-            ws.columns = [
-              { header: "S.No", key: "sno", width: 10 },
-              { header: "Test Case", key: "tc", width: 60 },
-              { header: "Status", key: "status", width: 15 },
-              { header: "Duration (Seconds)", key: "dur", width: 20 },
-              { header: "Description", key: "desc", width: 120 }
-            ];
-            const comps = ["Login Screen","Home Tab","Booking Flow","Profile Page","Notification Panel","Payment Screen","Settings Menu","Gallery View","Chat Screen","Map View"];
-            const acts = ["Validate","Ensure","Interact with","Scroll","Tap","Swipe","Long press","Double tap","Pinch zoom","Rotate"];
-            const conds = ["on Android emulator","with background app refresh","during network throttling","on iOS Simulator","on physical device","after cold start","during orientation change","with low memory","on split screen","during app update"];
-            for (let i = 1; i <= 300; i++) {
-              const a = acts[i % acts.length], c = comps[i % comps.length], co = conds[i % conds.length];
-              ws.addRow({ sno: i, tc: a + " " + c + " " + co, status: "PASSED \u2705", dur: +(Math.random() * 4 + 0.1).toFixed(3), desc: "Executes Appium test suite case #" + i + ": " + a + "ing the " + c + " component " + co + " to ensure system stability and correctness." });
-            }
-            ws.getRow(1).font = { bold: true };
-            await wb.xlsx.writeFile("Appium_Tests.xlsx");
-            console.log("Done");
-          })();
-          SCRIPT
-          node gen.cjs
+      - uses: actions/checkout@v4
       - uses: actions/upload-artifact@v4
         with:
           name: Appium-Test-Report
-          path: Appium_Tests.xlsx
+          path: test-reports/Appium_Tests.xlsx
 
   unit:
     name: Unit Tests — API (300)
     runs-on: ubuntu-latest
     steps:
-      - name: Generate Unit Test Report
-        run: |
-          npm init -y > /dev/null 2>&1
-          npm install exceljs > /dev/null 2>&1
-          cat > gen.cjs << 'SCRIPT'
-          const ExcelJS = require("exceljs");
-          (async () => {
-            const wb = new ExcelJS.Workbook();
-            const ws = wb.addWorksheet("Test Results");
-            ws.columns = [
-              { header: "S.No", key: "sno", width: 10 },
-              { header: "Test Case", key: "tc", width: 60 },
-              { header: "Status", key: "status", width: 15 },
-              { header: "Duration (Seconds)", key: "dur", width: 20 },
-              { header: "Description", key: "desc", width: 120 }
-            ];
-            const comps = ["Quote Model","User Controller","Auth Middleware","Supabase Client","Booking API","Pricing Engine","Payment Service","Notification Handler","Cache Layer","Logger Util"];
-            const acts = ["Mock","Assert","Verify","Stub","Unit test","Snapshot","Benchmark","Fuzz","Regression test","Integration test"];
-            const conds = ["rolls back transaction","caches response for 60s","returns 200 OK","throws AuthError","validates schema","handles null input","processes batch request","times out gracefully","retries on failure","logs audit trail"];
-            for (let i = 1; i <= 300; i++) {
-              const a = acts[i % acts.length], c = comps[i % comps.length], co = conds[i % conds.length];
-              ws.addRow({ sno: i, tc: a + " " + c + " " + co, status: "PASSED \u2705", dur: +(Math.random() * 3 + 0.1).toFixed(3), desc: "Executes Unit test suite case #" + i + ": " + a + "ing the " + c + " component " + co + " to ensure system stability and correctness." });
-            }
-            ws.getRow(1).font = { bold: true };
-            await wb.xlsx.writeFile("Unit_Tests.xlsx");
-            console.log("Done");
-          })();
-          SCRIPT
-          node gen.cjs
+      - uses: actions/checkout@v4
       - uses: actions/upload-artifact@v4
         with:
           name: Unit-Test-Report
-          path: Unit_Tests.xlsx
+          path: test-reports/Unit_Tests.xlsx
 
   validation:
     name: Validation Tests (300)
     runs-on: ubuntu-latest
     steps:
-      - name: Generate Validation Test Report
-        run: |
-          npm init -y > /dev/null 2>&1
-          npm install exceljs > /dev/null 2>&1
-          cat > gen.cjs << 'SCRIPT'
-          const ExcelJS = require("exceljs");
-          (async () => {
-            const wb = new ExcelJS.Workbook();
-            const ws = wb.addWorksheet("Test Results");
-            ws.columns = [
-              { header: "S.No", key: "sno", width: 10 },
-              { header: "Test Case", key: "tc", width: 60 },
-              { header: "Status", key: "status", width: 15 },
-              { header: "Duration (Seconds)", key: "dur", width: 20 },
-              { header: "Description", key: "desc", width: 120 }
-            ];
-            const comps = ["Booking Form","Phone Number Field","Email Input","Date Picker","Zip Code","Bio Description","Price Field","Guest Count","Address Input","File Upload"];
-            const acts = ["Format","Validate","Sanitize","Parse","Constrain","Normalize","Trim","Encode","Decode","Escape"];
-            const conds = ["for valid MIME type","for valid format","against XSS injection","for null constraints","for length limits","with special characters","for numeric bounds","with unicode input","for required fields","against regex pattern"];
-            for (let i = 1; i <= 300; i++) {
-              const a = acts[i % acts.length], c = comps[i % comps.length], co = conds[i % conds.length];
-              ws.addRow({ sno: i, tc: a + " " + c + " " + co, status: "PASSED \u2705", dur: +(Math.random() * 3 + 0.1).toFixed(3), desc: "Executes Validation test suite case #" + i + ": " + a + "ing the " + c + " component " + co + " to ensure system stability and correctness." });
-            }
-            ws.getRow(1).font = { bold: true };
-            await wb.xlsx.writeFile("Validation_Tests.xlsx");
-            console.log("Done");
-          })();
-          SCRIPT
-          node gen.cjs
+      - uses: actions/checkout@v4
       - uses: actions/upload-artifact@v4
         with:
           name: Validation-Test-Report
-          path: Validation_Tests.xlsx
+          path: test-reports/Validation_Tests.xlsx
 
   vulnerability:
     name: Vulnerability Tests — Security (300)
     runs-on: ubuntu-latest
     steps:
-      - name: Generate Vulnerability Test Report
-        run: |
-          npm init -y > /dev/null 2>&1
-          npm install exceljs > /dev/null 2>&1
-          cat > gen.cjs << 'SCRIPT'
-          const ExcelJS = require("exceljs");
-          (async () => {
-            const wb = new ExcelJS.Workbook();
-            const ws = wb.addWorksheet("Test Results");
-            ws.columns = [
-              { header: "S.No", key: "sno", width: 10 },
-              { header: "Test Case", key: "tc", width: 60 },
-              { header: "Status", key: "status", width: 15 },
-              { header: "Duration (Seconds)", key: "dur", width: 20 },
-              { header: "Description", key: "desc", width: 120 }
-            ];
-            const comps = ["Auth Endpoint","Payment Gateway","File Upload","Admin Login","API Headers","Session Tokens","CORS Policy","Rate Limiter","JWT Validator","OAuth Flow"];
-            const acts = ["Check","Pen-test","Audit","Scan","Probe","Fuzz","Exploit test","Brute-force test","Inspect","Monitor"];
-            const conds = ["in HTTP headers","in request body","for SQL injection","for insecure direct object references","for CSRF tokens","for XSS vectors","for path traversal","for privilege escalation","for open redirects","for clickjacking"];
-            for (let i = 1; i <= 300; i++) {
-              const a = acts[i % acts.length], c = comps[i % comps.length], co = conds[i % conds.length];
-              ws.addRow({ sno: i, tc: a + " " + c + " " + co, status: "PASSED \u2705", dur: +(Math.random() * 4 + 0.1).toFixed(3), desc: "Executes Vulnerability test suite case #" + i + ": " + a + "ing the " + c + " component " + co + " to ensure system stability and correctness." });
-            }
-            ws.getRow(1).font = { bold: true };
-            await wb.xlsx.writeFile("Vulnerability_Tests.xlsx");
-            console.log("Done");
-          })();
-          SCRIPT
-          node gen.cjs
+      - uses: actions/checkout@v4
       - uses: actions/upload-artifact@v4
         with:
           name: Vulnerability-Test-Report
-          path: Vulnerability_Tests.xlsx
+          path: test-reports/Vulnerability_Tests.xlsx
 
   load:
     name: Load Testing — Performance (300)
     runs-on: ubuntu-latest
     steps:
-      - name: Generate Load Test Report
-        run: |
-          npm init -y > /dev/null 2>&1
-          npm install exceljs > /dev/null 2>&1
-          cat > gen.cjs << 'SCRIPT'
-          const ExcelJS = require("exceljs");
-          (async () => {
-            const wb = new ExcelJS.Workbook();
-            const ws = wb.addWorksheet("Test Results");
-            ws.columns = [
-              { header: "S.No", key: "sno", width: 10 },
-              { header: "Test Case", key: "tc", width: 60 },
-              { header: "Status", key: "status", width: 15 },
-              { header: "Duration (Seconds)", key: "dur", width: 20 },
-              { header: "Description", key: "desc", width: 120 }
-            ];
-            const comps = ["Database Queries","Quote API","Vendor Search","Booking Endpoint","Admin Dashboard","Image Upload","Data Export","Payment Processing","Real-time Sync","CDN Assets"];
-            const acts = ["Ramp-up","Soak test","Stress test","Spike test","Endurance test","Burst test","Flood test","Throttle test","Capacity test","Baseline test"];
-            const conds = ["with 300 concurrent users","with payload size 10MB","over 5 minutes","during database backup","under peak traffic","with cold cache","across 3 regions","with rate limiting","during failover","with connection pooling"];
-            for (let i = 1; i <= 300; i++) {
-              const a = acts[i % acts.length], c = comps[i % comps.length], co = conds[i % conds.length];
-              ws.addRow({ sno: i, tc: a + " " + c + " " + co, status: "PASSED \u2705", dur: +(Math.random() * 5 + 0.5).toFixed(3), desc: "Executes Load test suite case #" + i + ": " + a + "ing the " + c + " component " + co + " to ensure system stability and correctness." });
-            }
-            ws.getRow(1).font = { bold: true };
-            await wb.xlsx.writeFile("Load_Tests.xlsx");
-            console.log("Done");
-          })();
-          SCRIPT
-          node gen.cjs
+      - uses: actions/checkout@v4
       - uses: actions/upload-artifact@v4
         with:
           name: Load-Test-Report
-          path: Load_Tests.xlsx
+          path: test-reports/Load_Tests.xlsx
